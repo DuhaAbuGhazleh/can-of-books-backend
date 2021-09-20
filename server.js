@@ -10,9 +10,13 @@ require("dotenv").config();
 app.use(cors());
 const PORT =process.env.PORT;
 const MONGO_SERVER=process.env.MONGO_SERVER;
-const { seedUser}=require('./models/userSchema')
-const {bookController}=require('./controller/book.controller')
-//const {bookController,getbookController}=require("./controller/book.controller")
+const { seedUser}=require('./models/userSchema');
+const {bookController}=require('./controller/book.controller');
+const {createBookController}=require('./controller/book.controller');
+const {deleteBookController}=require('./controller/book.controller');
+
+app.use(express.json());  ///===> Give us the ability to request the (POST)(DELET)and deal with them 
+
 
 ///we give it from mongoose documintation/connections/////////
 //mongoose.connect('mongodb://localhost:27017/myapp');
@@ -32,8 +36,8 @@ app.get('/app',(req,res)=>{
 })
 
 app.get('/book',bookController);
-
-
+app.post('/create-book',createBookController);
+app.delete('/delete-book/:id',deleteBookController);
 
 app.listen(PORT,()=>{
     console.log(`Listening to port ${PORT}`);

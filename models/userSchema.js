@@ -2,8 +2,8 @@
 
 const mongoose = require('mongoose');
 
-const bookSchema = require('../models/bookSchema.model');
-
+const {bookSchema} = require('../models/bookSchema.model');
+const {bookModel}=require("../models/bookSchema.model")
 ///creat eschema///
 
 //we use schema to define how our data look like //
@@ -40,7 +40,7 @@ let seedUser = () => {
     }
 ]
 
-   let newUser= new userModel({
+   let newUser= new bookModel({
        email:"duha@gmail.com",
        books:booksList
    })

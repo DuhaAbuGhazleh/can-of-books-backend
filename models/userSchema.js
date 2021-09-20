@@ -10,22 +10,19 @@ const bookSchema = require('../models/bookSchema.model');
 //Build a Mongoose 'Book' schema with valid keys for `title`, `description`, `status`, and `email`
 
 
-// const bookDB = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 
-//     email: String,
-//     books: [bookSchema]
-// });
+    email: String,
+    books: [bookSchema]
+});
 
 
 /////create model/////
 
-const bookModel = mongoose.model('Book', bookSchema);
+const userModel = mongoose.model('bookUser', userSchema);
 
-const seedBook = () => {
-    let newBook = new bookModel({
-        email:'anything@something.com',
-
-        books:[
+let seedUser = () => {
+    let booksList=[
     {
         title:'The First Days',
         description:'It looks like the end of the world. But Katie and Jenni and many others will do whatever they have to to stay alive. Run, fight, pick each other up when they stumble, fall in love…anything is possible at the end of the world.',
@@ -41,20 +38,19 @@ const seedBook = () => {
         description:'Wall Street Journal bestseller | An indispensable guide to decision-making and risk-taking for anyone who finds themselves afraid of making a wrong choice in their career. This fresh, new approach comes from one of the most highly regarded and well-respected female tech executives in Silicon Valley, who made many wrong choices in her career, but learned how to turn those down moments into successes.',
         status:'new',
     }
-],
+]
 
-    })
+   let newUser= new userModel({
+       email:"duha@gmail.com",
+       books:booksList
+   })
     
-
+console.log("hello")
     //// to save created object to connection (Book)////
-    newBook.save();
+    newUser.save();
 
    
 };
 
 
-
-
-
-
-module.exports = bookModel;
+module.exports ={ userModel,seedUser}

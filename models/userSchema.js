@@ -2,8 +2,8 @@
 
 const mongoose = require('mongoose');
 
-const {bookSchema} = require('../models/bookSchema.model');
-const {bookModel}=require("../models/bookSchema.model")
+//const {bookSchema} = require('../models/bookSchema.model');
+//const {bookModel}=require("../models/bookSchema.model")
 ///creat eschema///
 
 //we use schema to define how our data look like //
@@ -13,37 +13,42 @@ const {bookModel}=require("../models/bookSchema.model")
 const userSchema = new mongoose.Schema({
 
     email: String,
-    books: [bookSchema]
+    title:String,
+        description:String,
+        status:String,
+   // books: [bookSchema]
 });
 
 
-/////create model/////
+/////create model to interact with student collection in db in atlas/////
 
-const userModel = mongoose.model('bookUser', userSchema);
+const userModel = mongoose.model('bookusers', userSchema);
 
-let seedUser = () => {
-    let booksList=[
-    {
-        title:'The First Days',
-        description:'It looks like the end of the world. But Katie and Jenni and many others will do whatever they have to to stay alive. Run, fight, pick each other up when they stumble, fall in love…anything is possible at the end of the world.',
-        status:'Used',
-    },
-    {
-        title:'The Kite Runner',
-        description:'A sweeping story of family, love, and friendship told against the devastating backdrop of the history of Afghanistan over the last thirty years, The Kite Runner is an unusual and powerful novel that has become a beloved, one-of-a-kind classic.',
-        status:'new',
-    },
-    {
-        title:'Choose Possibility',
-        description:'Wall Street Journal bestseller | An indispensable guide to decision-making and risk-taking for anyone who finds themselves afraid of making a wrong choice in their career. This fresh, new approach comes from one of the most highly regarded and well-respected female tech executives in Silicon Valley, who made many wrong choices in her career, but learned how to turn those down moments into successes.',
-        status:'new',
-    }
-]
+const seedUser = () => {
+//     let booksList=[
+//     {
+//         title:'The First Days',
+//         description:'It looks like the end of the world. But Katie and Jenni and many others will do whatever they have to to stay alive. Run, fight, pick each other up when they stumble, fall in love…anything is possible at the end of the world.',
+//         status:'Used',
+//     },
+//     {
+//         title:'The Kite Runner',
+//         description:'A sweeping story of family, love, and friendship told against the devastating backdrop of the history of Afghanistan over the last thirty years, The Kite Runner is an unusual and powerful novel that has become a beloved, one-of-a-kind classic.',
+//         status:'new',
+//     },
+//     {
+//         title:'Choose Possibility',
+//         description:'Wall Street Journal bestseller | An indispensable guide to decision-making and risk-taking for anyone who finds themselves afraid of making a wrong choice in their career. This fresh, new approach comes from one of the most highly regarded and well-respected female tech executives in Silicon Valley, who made many wrong choices in her career, but learned how to turn those down moments into successes.',
+//         status:'new',
+//     }
+// ]
 
-   let newUser= new bookModel({
+   let newUser= new userModel({
        email:"duha@gmail.com",
-       books:booksList
-   })
+       title:"The First Days",
+       description:"It looks like the end of the world. But Katie and Jenni and many others will do whatever they have to to stay alive. Run, fight, pick each other up when they stumble, fall in love…anything is possible at the end of the world.",
+         status:"Used",
+   });
     
 console.log("hello")
     //// to save created object to connection (Book)////
@@ -53,4 +58,4 @@ console.log("hello")
 };
 
 
-module.exports ={ userModel,seedUser}
+module.exports ={ userModel}

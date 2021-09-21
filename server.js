@@ -28,7 +28,10 @@ app.use(express.json());  ///===> Give us the ability to request the (POST)(DELE
 
 mongoose.connect(`${MONGO_SERVER}/book`,{useNewUrlParser: true, useUnifiedTopology: true});////WE should put this object in the connection {useNewUrlParser: true, useUnifiedTopology: true}
 
+app.get('/',(req,res)=>{
 
+    res.status(200).send("Can of Book");
+});
 
 app.get('/app',(req,res)=>{
     seedUser()

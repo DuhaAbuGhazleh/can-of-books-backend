@@ -9,11 +9,10 @@ const axios = require('axios');
 require("dotenv").config();
 app.use(cors());
 const PORT =process.env.PORT;
-const MONGO_SERVER=process.env.MONGO_SERVER;
+const MONGO_URL=process.env.MONGO_URL;
 const { seedUser}=require('./models/userSchema');
-const {bookController}=require('./controller/book.controller');
-const {createBookController}=require('./controller/book.controller');
-const {deleteBookController}=require('./controller/book.controller');
+const {  bookController,createBookController,deleteBookController,updateBookController,}=require('./controller/book.controller');
+
 
 app.use(express.json());  ///===> Give us the ability to request the (POST)(DELET)and deal with them 
 
@@ -26,21 +25,22 @@ app.use(express.json());  ///===> Give us the ability to request the (POST)(DELE
 /// We will go to terminal and typy (use Book ) to create BD  after that we will provide it in the connect////
 
 
-mongoose.connect(`${MONGO_SERVER}/book`,{useNewUrlParser: true, useUnifiedTopology: true});////WE should put this object in the connection {useNewUrlParser: true, useUnifiedTopology: true}
+mongoose.connect(`${MONGO_URL}`,{useNewUrlParser: true, useUnifiedTopology: true});////WE should put this object in the connection {useNewUrlParser: true, useUnifiedTopology: true}
 
 app.get('/',(req,res)=>{
 
     res.status(200).send("Can of Book");
 });
 
-app.get('/app',(req,res)=>{
-    seedUser()
-    res.json("yes")
+app.get("/app",(req,res)=>{
+    //seedUser()
+    res.json(seedUser())
 })
 
-app.get('/book',bookController);
+app.get('/book-get',bookController);
 app.post('/create-book',createBookController);
 app.delete('/delete-book/:id',deleteBookController);
+ app.put('/update-book/:id',updateBookController);
 
 app.listen(PORT,()=>{
     console.log(`Listening to port ${PORT}`);

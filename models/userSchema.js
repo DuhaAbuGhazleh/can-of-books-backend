@@ -49,13 +49,17 @@ const seedUser = () => {
        description:"It looks like the end of the world. But Katie and Jenni and many others will do whatever they have to to stay alive. Run, fight, pick each other up when they stumble, fall in love…anything is possible at the end of the world.",
          status:"Used",
    });
+
+
     
 console.log("hello")
     //// to save created object to connection (Book)////
     newUser.save();
 
+
+
    
 };
 
 
-module.exports ={ userModel}
+module.exports ={ userModel,seedUser}
